@@ -1,3 +1,4 @@
+require('dotenv').config()
 const Telegraf = require('telegraf')
 const configs = require('./configs')
 const cmd_ip = require('./modules/ip')

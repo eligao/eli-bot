@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "country-emoji": "^1.2.0",
+    "dotenv": "^4.0.0",
     "ipip2": "^2.2.0",
     "maxmind": "^2.2.0",
     "node-fetch": "^1.7.1",
