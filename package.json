@@ -1,0 +1,21 @@
+{
+  "name": "eli-bot",
+  "version": "0.0.1",
+  "description": "The heart and soul for @eli_robot",
+  "main": "src/index.js",
+  "author": "Eli <refraction222@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "country-emoji": "^1.2.0",
+    "ipip2": "^2.2.0",
+    "maxmind": "^2.2.0",
+    "node-fetch": "^1.7.1",
+    "telegraf": "^3.9.0"
+  },
+  "scripts": {
+    "start": "nodemon ./src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
