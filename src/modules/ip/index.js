@@ -107,7 +107,7 @@ const resp_resolve = template `解析地址 ${'addr'}\n`;
 const resp_geo = template ` 地址: ${'country'} - ${'province'} - ${'city'}\n`;
 const resp_pfx = template ` 子网: ${'pfx'}${'pfx_cc'} - ${'pfx_name'} - ${'pfx_desc'}\n`;
 const resp_ptr = template ` 反解: ${'ptr'}\n`;
-const resp_asn = template `[AS${'asn'}${'as_cc'}:${'as_name'} ${'as_desc'}](https://bgpview.io/asn/${'asn'})\n`;
+const resp_asn = template `[AS${'asn'}${'as_cc'} ${'as_name'}, ${'as_desc'}](https://bgpview.io/asn/${'asn'})\n`;
 const resp_footer_complete = template `======\n查询完成，耗时${'ms_elapsed'}毫秒`;
 const resp_footer_pending = template `======\n查询中，已耗时${'ms_elapsed'}毫秒`;
 const resp_err_invalidargs = '参数错误\n使用方法：`/ip 主机名或IP地址`\n 例如：`/ip www.telegram.org`';
