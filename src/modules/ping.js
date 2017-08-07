@@ -7,7 +7,7 @@ async function ping(ctx, next) {
         parse_mode: 'Markdown'
     });
     let ms_elapsed = Date.now() - ms_begin;
-    await ctx.telegram.editMessageText(ctx.chat.id, msg.message_id, null, `\`Pong, in ${ms_elapsed}ms.\``, {
+    ctx.telegram.editMessageText(ctx.chat.id, msg.message_id, null, `\`Pong, in ${ms_elapsed}ms.\``, {
         parse_mode: 'Markdown'
     });
 }

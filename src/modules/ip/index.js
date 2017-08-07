@@ -47,12 +47,6 @@ function fillTemplates(templates = [], values) {
     return ret_val;
 }
 
-async function handleReply(ctx, next) {
-    /*
-    
-    */
-}
-
 async function queryBgpview(addr) {
     try {
         let queryUrl = 'https://api.bgpview.io/ip/' + addr;
