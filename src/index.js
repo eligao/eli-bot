@@ -23,6 +23,7 @@ async function main() {
     // FYI: First non-file reply will be served via webhook response
     bot.startWebhook(`/${configs.BOT_TOKEN}`, null, configs.BOT_WEBHOOK_PORT);
 
+    bot.hears(/^查\s/, parse_args, parse_reply, cmd_ip);
     bot.command('ip', parse_args, parse_reply, cmd_ip);
     bot.command('ping', cmd_ping);
 
