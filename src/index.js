@@ -4,6 +4,7 @@ const configs = require('./configs');
 const cmd_ip = require('./modules/ip');
 const cmd_ping = require('./modules/ping');
 const parse_args = require('./utils/parse_args');
+const parse_reply = require('./modules/ip/parse_reply');
 
 
 async function main() {
@@ -22,7 +23,7 @@ async function main() {
     // FYI: First non-file reply will be served via webhook response
     bot.startWebhook(`/${configs.BOT_TOKEN}`, null, configs.BOT_WEBHOOK_PORT);
 
-    bot.command('ip', parse_args, cmd_ip);
+    bot.command('ip', parse_args, parse_reply, cmd_ip);
     bot.command('ping', cmd_ping);
 
     //bot.on('text',(ctx => console.log(ctx)))
