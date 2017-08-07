@@ -9,9 +9,11 @@ const {
 } = require('country-emoji');
 const util = require('util');
 const dns = require('dns');
-//const mm_asn= mmdb.openSync('data/GeoLite2-ASN.mmdb')
+const LRU = require('lru-cache');
+// const mm_asn= mmdb.openSync('data/GeoLite2-ASN.mmdb')
 // const TgLogger = require('../../utils/TgLogger')
 // const Logger = new TgLogger(configs.BOT_LOGGER_CHANNEL_ID)
+
 
 function mmdbI18nStr(elem, locales = ['en'], fallback = 'en') {
     let val = undefined;
@@ -36,6 +38,7 @@ function template(strings, ...keys) {
     });
 }
 
+
 function fillTemplates(templates = [], values) {
     let ret_val = '';
     for (let t of templates) {
@@ -47,14 +50,23 @@ function fillTemplates(templates = [], values) {
     return ret_val;
 }
 
+
+// Create a cache lasts for 6 hours
+const bgpviewCache = LRU({max:1000, maxAge:1000 * 60 * 60 * 6});
 async function queryBgpview(addr) {
-    try {
+    let data = bgpviewCache.get(addr);
+    if(!data){
+        // Cache miss, go query API
         let queryUrl = 'https://api.bgpview.io/ip/' + addr;
         // console.log(queryUrl)
         let query = await fetch(queryUrl);
-        let data = await query.json();
-        let pfx = data.data.prefixes[0] || {};
-        let return_data = {
+        data = await query.json();
+        bgpviewCache.set(addr,data);
+    }
+    let pfx = data.data.prefixes[0] || undefined;
+    let return_data = {}
+    if(pfx)
+        return_data = {
             pfx: pfx.prefix,
             pfx_cc: flag(pfx.country_code),
             pfx_name: pfx.name,
@@ -65,11 +77,7 @@ async function queryBgpview(addr) {
             as_desc: pfx.asn.description,
             as_cc: flag(pfx.asn.country_code)
         };
-        return return_data;
-    } catch (err) {
-        console.error(err.message);
-        return {};
-    }
+    return return_data;
 }
 
 function queryMMCity(addr) {
