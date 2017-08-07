@@ -148,7 +148,7 @@ async function ip_query(ctx, next) {
         //console.log('ipQuery:',resIP)
         Object.assign(query, resIP);
         query.ms_elapsed = Date.now() - ms_begin;
-        ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, fillTemplates(['`', resp_query, resp_resolve, resp_geo, resp_footer_pending, '`'], query), {
+        await ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, fillTemplates(['`', resp_query, resp_resolve, resp_geo, resp_footer_pending, '`'], query), {
             reply_to_message_id: ctx.update.message.message_id,
             parse_mode: 'Markdown',
             disable_web_page_preview: true
