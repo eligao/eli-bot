@@ -10,6 +10,6 @@ const utils = {
             return result.join('');
         });
     }
-}
+};
 
 module.exports = utils;
