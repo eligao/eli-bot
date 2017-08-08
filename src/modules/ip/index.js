@@ -125,6 +125,7 @@ async function ip_query(ctx, next) {
     let msg;
     try {
         ctx.telegram.sendChatAction(ctx.chat.id, 'typing');
+        let sender = ctx.message.from;
         let ms_begin = Date.now();
         if (ctx.state.args.length < 2) {
             let err = new Error();
@@ -136,7 +137,7 @@ async function ip_query(ctx, next) {
             host: host,
             ms_elapsed: 0
         };
-        console.log(`Got command from ${ctx.message.from.username}: ${ctx.message.text}`);
+        console.log(`Got command from ${sender.first_name} ${sender.last_name} @${sender.username} (UID ${sender}): ${ctx.message.text}`);
         msg = await ctx.reply(fillTemplates(['`', resp_query, resp_footer_pending, '`'], query), {
             reply_to_message_id: ctx.update.message.message_id,
             parse_mode: 'Markdown',
