@@ -193,11 +193,6 @@ async function ip_query(ctx, next) {
             default:
                 ctx.telegram.forwardMessage(configs.BOT_LOGGER_CHANNEL_ID, ctx.message.chat.chatId, ctx.message.message_id);
                 ctx.telegram.sendMessage(configs.BOT_LOGGER_CHANNEL_ID, `Log:\n ${err.message}\n${err.stack}`);
-                ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, resp_err_uncaught, {
-                    reply_to_message_id: ctx.update.message.message_id,
-                    parse_mode: 'Markdown',
-                    disable_web_page_preview: true
-                });
                 ctx.reply(resp_err_uncaught, {
                     reply_to_message_id: ctx.update.message.message_id
                 });

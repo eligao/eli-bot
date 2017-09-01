@@ -14,9 +14,13 @@
     "telegraf": "^3.9.0"
   },
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "start": "nodemon ./src/index.js",
+    "postinstall": "bash ./postinstall.sh"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
+  },
+  "engines": {
+    "node": "8.x.x"
   }
 }
