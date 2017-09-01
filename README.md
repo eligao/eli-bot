@@ -7,7 +7,9 @@ More functions are coming on the way.
 
 ## Usage
 
-1. Create a `.env` file with following parameters:
+
+### Ready
+Create a `.env` file with following parameters:
 ``` dotenv
 # Token of the bot, ask @botfather for one.
 BOT_TOKEN = ''
@@ -32,6 +34,8 @@ MMDB_CITY_URL = 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-Ci
 ```
 If running on heroku or other cloud platform, set your environment vars accordingly instead.
 
-2. `yarn install && yarn start` or `npm install && npm start`
+### Set
+`yarn install && yarn start` or `npm install && npm start`
 
-3. Knock your bot with `/ping` and see if it works.
+### Go
+Knock your bot with `/ping` and see if it works.
