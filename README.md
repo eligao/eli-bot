@@ -32,7 +32,7 @@ IPIP_DB_AUTH_HEAD = ''
 # where you download maxmind db
 MMDB_CITY_URL = 'https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz'
 ```
-If running on heroku or other cloud platform, set your environment vars accordingly instead.
+If running on heroku or other cloud platforms, set your environment vars accordingly instead.
 
 ### Set
 `yarn install && yarn start` or `npm install && npm start`
