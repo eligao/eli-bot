@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "nodemon ./src/index.js",
-    "postinstall": "bash ./postinstall.sh"
+    "postinstall": "bash ./updatedb.sh"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
