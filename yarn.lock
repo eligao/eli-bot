@@ -107,9 +107,9 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-big-integer@^1.6.15:
-  version "1.6.24"
-  resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.24.tgz#1ed84d018ac3c1c72b307e7f7d94008e8ee20311"
+big-integer@^1.6.22:
+  version "1.6.25"
+  resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.25.tgz#1de45a9f57542ac20121c682f8d642220a34e823"
 
 binary-extensions@^1.0.0:
   version "1.10.0"
@@ -839,7 +839,7 @@ lowercase-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.0.tgz#4e3366b39e7f5457e35f1324bdf6f88d0bfc7306"
 
-lru-cache@^4.0.1, lru-cache@^4.1.1:
+lru-cache@^4.0.1, lru-cache@^4.0.2, lru-cache@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.1.tgz#622e32e82488b49279114a4f9ecf45e7cd6bba55"
   dependencies:
@@ -857,11 +857,11 @@ map-stream@~0.1.0:
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
 
 maxmind@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/maxmind/-/maxmind-2.2.0.tgz#c548ca13251daa183b7201d2ab8cb831d1268ea2"
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/maxmind/-/maxmind-2.3.0.tgz#ed8cda322a43be60072f4862c2791a87d78594bd"
   dependencies:
-    big-integer "^1.6.15"
-    lru-cache "^4.0.1"
+    big-integer "^1.6.22"
+    lru-cache "^4.0.2"
 
 micromatch@^2.1.5:
   version "2.3.11"
@@ -1360,8 +1360,8 @@ tar@^2.2.1:
     inherits "2"
 
 telegraf@^3.9.0:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.11.1.tgz#664c9b8e4f5792304503a42dd0a3d85e404b3945"
+  version "3.15.3"
+  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.15.3.tgz#3cd283d7da861800a845da727fe903a1ba28f3d2"
   dependencies:
     debug "^3.0.0"
     node-fetch "^1.6.3"
