@@ -1360,8 +1360,8 @@ tar@^2.2.1:
     inherits "2"
 
 telegraf@^3.9.0:
-  version "3.15.3"
-  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.15.3.tgz#3cd283d7da861800a845da727fe903a1ba28f3d2"
+  version "3.16.3"
+  resolved "https://registry.yarnpkg.com/telegraf/-/telegraf-3.16.3.tgz#cc615a043276d7050ba2082a05940f71b9228f20"
   dependencies:
     debug "^3.0.0"
     node-fetch "^1.6.3"
