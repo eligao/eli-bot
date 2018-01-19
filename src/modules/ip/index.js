@@ -1,4 +1,4 @@
-'strict mode';
+'use strict';
 const configs = require('../../configs');
 const fetch = require('node-fetch');
 const mmdb = require('maxmind');
