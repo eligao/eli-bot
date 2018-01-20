@@ -22,11 +22,9 @@ const query = async function(args){
         ...queryDefaultArgs,
         ...args
     };
-    console.log(newArgs);
     let apiSearchParams = new URLSearchParams();
     Object.entries(newArgs).map(([k,v]) => apiSearchParams.set(k,v));
     apiurl.search = apiSearchParams.toString();
-    console.log(apiurl);
     let res = await fetch(apiurl.toString(),{
         headers:{
             'User-Agent': HUOBI_OTC_CLIENT_UA
