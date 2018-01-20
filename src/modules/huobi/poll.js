@@ -39,11 +39,11 @@ async function sendOTCStatus(bot, chatId){
     });
 
     let USDTMakersTable = resUSDTMakers.data.reverse()
-        .map(elem => `${elem.userName}\t${elem.fixedPrice}CNY\t${elem.minTradeLimit}-${elem.maxTradeLimit}CNY\t${elem.tradeCount}USDT\t${elem.merchant==='1'?'*':''}`)
+        .map(elem => `${elem.userName}\t${elem.price}CNY\t${elem.minTradeLimit}-${elem.maxTradeLimit}CNY\t${elem.tradeCount}USDT\t${elem.merchant==='1'?'*':''}`)
         .join('\n');
        
     let USDTTakersTable = resUSDTTakers.data
-        .map(elem => `${elem.userName}\t${elem.fixedPrice}CNY\t${elem.minTradeLimit}-${elem.maxTradeLimit}CNY\t${elem.tradeCount}USDT\t${elem.merchant==='1'?'*':''}`)
+        .map(elem => `${elem.userName}\t${elem.price}CNY\t${elem.minTradeLimit}-${elem.maxTradeLimit}CNY\t${elem.tradeCount}USDT\t${elem.merchant==='1'?'*':''}`)
         .join('\n');
         resText +=  `USDT:\n`+
                     `\`${USDTMakersTable}\`\n`+
