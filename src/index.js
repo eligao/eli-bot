@@ -5,6 +5,7 @@ const cmd_ip = require('./modules/ip');
 const cmd_ping = require('./modules/ping');
 const parse_args = require('./utils/parse_args');
 const parse_reply = require('./modules/ip/parse_reply');
+const huobiPoll = require('./modules/huobi/poll');
 
 
 async function main() {
@@ -26,6 +27,8 @@ async function main() {
     bot.hears(/^查\s/, parse_args, parse_reply, cmd_ip);
     bot.command('ip', parse_args, parse_reply, cmd_ip);
     bot.command('ping', cmd_ping);
+    
+    huobiPoll.startSendingOTCStatus(bot,configs.BOT_HUOBI_OTC_CHANNEL_ID,60000);
 
     //bot.on('text',(ctx => console.log(ctx)))
     bot.catch((err) => {

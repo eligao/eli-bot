@@ -18,9 +18,10 @@
     "postinstall": "bash ./updatedb.sh"
   },
   "devDependencies": {
+    "jest": "^22.1.4",
     "nodemon": "^1.11.0"
   },
   "engines": {
-    "node": "8.x.x"
+    "node": ">=8.0.0"
   }
 }
