@@ -5,9 +5,5 @@ describe('query', () => {
     let result = await query({coinId:2});
     console.log(result);
     expect(result).toBeDefined();
-    // await query().then(result => {
-    //   console.log(result);
-    //   expect(result).toBeDefined();
-    // })
   });
 });
