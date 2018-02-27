@@ -122,7 +122,9 @@ const resp_err_reserved = '保留段';
 const resp_err_uncaught = '出现了未知错误\n此事件已被报告给开发者';
 
 async function ip_query(ctx, next) {
-    let msg;
+    let msg, ip_family = null;
+    if(ctx.state.args[0] === '/ip6')
+        ip_family = 6;
     try {
         ctx.telegram.sendChatAction(ctx.chat.id, 'typing');
         let sender = ctx.message.from;
@@ -143,7 +145,7 @@ async function ip_query(ctx, next) {
             parse_mode: 'Markdown',
             disable_web_page_preview: true
         });
-        let dnsRes = await dnsLookup(host);
+        let dnsRes = await dnsLookup(host, {family: ip_family});
         let addr = dnsRes.address;
         query.addr = addr;
         // msg = await ctx.telegram.editMessageText(msg.chat.id,msg.message_id,null,fillTemplates(['`',resp_query,resp_resolve,resp_footer_pending,'`'],query),{reply_to_message_id:ctx.update.message.message_id, parse_mode:'Markdown'})
