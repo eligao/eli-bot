@@ -2,7 +2,7 @@
 const configs = require('../../configs');
 const fetch = require('node-fetch');
 const mmdb = require('maxmind');
-const ipip = require('../../../lib/ipip/ip');
+const ipip = require('../../../lib/ipip/ipx');
 const mm_city = mmdb.openSync('data/GeoLite2-City.mmdb');
 const {
     flag
@@ -13,7 +13,7 @@ const LRU = require('lru-cache');
 // const mm_asn= mmdb.openSync('data/GeoLite2-ASN.mmdb')
 // const TgLogger = require('../../utils/TgLogger')
 // const Logger = new TgLogger(configs.BOT_LOGGER_CHANNEL_ID)
-ipip.load('data/17monipdb.dat');
+ipip.load('data/17monipdb.datx');
 
 function mmdbI18nStr(elem, locales = ['en'], fallback = 'en') {
     let val = undefined;
