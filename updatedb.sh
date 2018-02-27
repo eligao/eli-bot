@@ -1,9 +1,9 @@
 #!/bin/bash
 # remember to set .env!
-rm -rv data/*.dat data/*.mmdb
+rm -rv data/*.dat data/*.datx data/*.mmdb
 wget \
     --header="$IPIP_DB_AUTH_HEAD" \
-    -O data/17monipdb.dat \
+    -O data/17monipdb.datx \
     $IPIP_DB_DL_URL
 mkdir data_tmp
 cd data_tmp
