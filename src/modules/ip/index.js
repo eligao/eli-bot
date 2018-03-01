@@ -106,6 +106,23 @@ function queryIPIP(addr) {
 }
 
 const dnsLookup = util.promisify(dns.lookup);
+async function dnsLookupRetry(...args) {
+    let dnsRes;
+    const MAX_RETRY = 3;
+    for(let i = 0; i< MAX_RETRY; i++){
+        try{
+            dnsRes = await dnsLookup(...args);
+            return dnsRes;
+        }
+        catch (err) {
+            if(err.code === 'EAI_AGAIN')
+                continue;
+        }
+    }
+    let e = new Error();
+    e.code = 'EMAXRETRYEXCEEDED';
+    throw e;
+}
 
 const resp_query = template `查询目标 ${'host'}\n`;
 const resp_resolve = template `解析地址 ${'addr'}\n`;
@@ -145,7 +162,7 @@ async function ip_query(ctx, next) {
             parse_mode: 'Markdown',
             disable_web_page_preview: true
         });
-        let dnsRes = await dnsLookup(host, {family: ip_family});
+        let dnsRes = await dnsLookupRetry(host, {family: ip_family});
         let addr = dnsRes.address;
         query.addr = addr;
         // msg = await ctx.telegram.editMessageText(msg.chat.id,msg.message_id,null,fillTemplates(['`',resp_query,resp_resolve,resp_footer_pending,'`'],query),{reply_to_message_id:ctx.update.message.message_id, parse_mode:'Markdown'})
@@ -184,6 +201,7 @@ async function ip_query(ctx, next) {
                     disable_web_page_preview: true
                 });
                 break;
+            case 'EMAXRETRYEXCEEDED':
             case 'ENOTFOUND':
             case 'EAI_FAIL':
                 ctx.telegram.editMessageText(ctx.chat.id, msg.message_id, null, resp_err_nxdomain, {
