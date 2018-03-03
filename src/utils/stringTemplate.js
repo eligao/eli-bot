@@ -6,7 +6,8 @@ function template(strings, ...keys) {
         let result = [strings[0]];
         keys.forEach(function (key, i) {
             let value = Number.isInteger(key) ? values[key] : _.get(dict,key);
-            if(typeof(value) === 'undefined') value = '???';
+            if(typeof(value) === 'undefined' || value === null)
+                value = '???';
             result.push(value, strings[i + 1]);
         });
         return result.join('');
