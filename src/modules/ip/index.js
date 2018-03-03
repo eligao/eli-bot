@@ -156,7 +156,7 @@ async function ip_query(ctx, next) {
             host: host,
             ms_elapsed: 0
         };
-        console.log(`Got command from ${sender.first_name} ${sender.last_name} @${sender.username} (UID ${sender}): ${ctx.message.text}`);
+        console.log(`Got command from ${sender.first_name} ${sender.last_name} @${sender.username} (UID ${sender.id}): ${ctx.message.text}`);
         msg = await ctx.reply(fillTemplates(['`', resp_query, resp_footer_pending, '`'], query), {
             reply_to_message_id: ctx.update.message.message_id,
             parse_mode: 'Markdown',
@@ -211,7 +211,7 @@ async function ip_query(ctx, next) {
                 });
                 break;
             default:
-                ctx.telegram.forwardMessage(configs.BOT_LOGGER_CHANNEL_ID, ctx.message.chat.chatId, ctx.message.message_id);
+                ctx.telegram.forwardMessage(configs.BOT_LOGGER_CHANNEL_ID, ctx.message.chat.id, ctx.message.message_id);
                 ctx.telegram.sendMessage(configs.BOT_LOGGER_CHANNEL_ID, `Log:\n ${err.message}\n${err.stack}`);
                 ctx.reply(resp_err_uncaught, {
                     reply_to_message_id: ctx.update.message.message_id
