@@ -10,6 +10,8 @@ const {
 const util = require('util');
 const dns = require('dns');
 const LRU = require('lru-cache');
+const { template, fillTemplates } = require('../../utils/stringTemplate');
+
 // const mm_asn= mmdb.openSync('data/GeoLite2-ASN.mmdb')
 // const TgLogger = require('../../utils/TgLogger')
 // const Logger = new TgLogger(configs.BOT_LOGGER_CHANNEL_ID)
@@ -25,31 +27,6 @@ function mmdbI18nStr(elem, locales = ['en'], fallback = 'en') {
     }
     return val;
 }
-
-function template(strings, ...keys) {
-    return (function (...values) {
-        var dict = values[values.length - 1] || {};
-        var result = [strings[0]];
-        keys.forEach(function (key, i) {
-            var value = (Number.isInteger(key) ? values[key] : dict[key]) || '???';
-            result.push(value, strings[i + 1]);
-        });
-        return result.join('');
-    });
-}
-
-
-function fillTemplates(templates = [], values) {
-    let ret_val = '';
-    for (let t of templates) {
-        if (typeof t === 'function')
-            ret_val += t(values);
-        else
-            ret_val += t;
-    }
-    return ret_val;
-}
-
 
 // Create a cache lasts for 6 hours
 const bgpviewCache = LRU({
