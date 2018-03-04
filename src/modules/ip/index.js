@@ -105,7 +105,7 @@ const resp_query = template `查询目标 ${'host'}\n`;
 const resp_resolve = template `解析地址 ${'addr'}\n`;
 const resp_geo = template ` 地址: ${'country'} - ${'province'} - ${'city'}\n`;
 const resp_org = template ` 组织: ${'isp'} - ${'org'}\n`
-const resp_pfx = template ` 子网: ${'pfx'}${'pfx_cc'} - ${'pfx_name'} - ${'pfx_desc'}\n`;
+const resp_pfx = template ` 网段: ${'pfx'}${'pfx_cc'} - ${'pfx_name'} - ${'pfx_desc'}\n`;
 const resp_ptr = template ` 反解: ${'ptr'}\n`;
 const resp_asn = template `[AS${'asn'}${'as_cc'} ${'as_name'}, ${'as_desc'}](https://bgpview.io/asn/${'asn'})\n`;
 const resp_footer_complete = template `======\n查询完成，耗时${'ms_elapsed'}毫秒`;
