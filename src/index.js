@@ -9,6 +9,7 @@ const parse_args = require('./utils/parse_args');
 const parse_reply = require('./modules/ip/parse_reply');
 const huobiPoll = require('./modules/huobi/poll');
 const cmd_as = require('./modules/as');
+const fetch = require('node-fetch');
 
 async function main() {
     const bot = new Telegraf(configs.BOT_TOKEN, {
@@ -30,15 +31,13 @@ async function main() {
         req.on('data', function(chunk) {
             content += chunk.toString();
         });
-        req.on('end', function(chunk) {
-            request({
-                url: configs.BOT_WEBHOOK_REDIRECT,
+        req.on('end', async function(chunk) {
+            let res = await fetch(configs.BOT_WEBHOOK_REDIRECT,{
                 method: 'POST',
                 headers: {
                     "Content-type": "application/json"
                 },
                 body: content
-            }, function(error, response, body) {
             });
         });
         bot_callback(req, res);
