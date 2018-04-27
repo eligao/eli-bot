@@ -9,7 +9,8 @@ mkdir data_tmp
 cd data_tmp
 wget $MMDB_CITY_URL
 wget $MMDB_ASN_URL
-tar -zxf *.tar.gz
+tar -zxf GeoLite2-City.tar.gz
+tar -zxf GeoLite2-ASN.tar.gz
 cd ..
 mv -v data_tmp/*/*.mmdb data/
 rm -rfv ./data_tmp
