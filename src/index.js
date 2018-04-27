@@ -1,5 +1,7 @@
 require('dotenv').config();
 const Telegraf = require('telegraf');
+const http = require('http');
+const request = require('request');
 const configs = require('./configs');
 const cmd_ip = require('./modules/ip');
 const cmd_ping = require('./modules/ping');
@@ -22,7 +24,25 @@ async function main() {
 
     // Start https webhook
     // FYI: First non-file reply will be served via webhook response
-    bot.startWebhook(`/${configs.BOT_TOKEN}`, null, configs.BOT_WEBHOOK_PORT);
+    let bot_callback = bot.webhookCallback(`/${configs.BOT_TOKEN}`);
+    http.createServer(function(req, res) {
+        let content = "";
+        req.on('data', function(chunk) {
+            content += chunk.toString();
+        });
+        req.on('end', function(chunk) {
+            request({
+                url: configs.BOT_WEBHOOK_REDIRECT,
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: content
+            }, function(error, response, body) {
+            });
+        });
+        bot_callback(req, res);
+    }).listen(configs.BOT_WEBHOOK_PORT);
 
     bot.hears(/^查\s/, parse_args, parse_reply, cmd_ip);
     bot.command('ip', parse_args, parse_reply, cmd_ip);
