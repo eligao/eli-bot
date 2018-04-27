@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const mmdb = require('maxmind');
 const ipip = require('../../../lib/ipip/ipx');
 const mm_city = mmdb.openSync('data/GeoLite2-City.mmdb');
+const mm_asn = mmdb.openSync('data/GeoLite2-ASN.mmdb');
 const {
     flag
 } = require('country-emoji');
@@ -76,6 +77,7 @@ function queryMMASN(addr) {
         asn: data.autonomous_system_number,
         as_desc: data.autonomous_system_organization
     }
+    return ret_data;
 }
 
 function queryIPIP(addr) {
