@@ -171,7 +171,7 @@ async function ip_query(ctx, next) {
         //console.log('BGPView:',resBgpview)
         Object.assign(query, resMMASN);
         query.ms_elapsed = Date.now() - ms_begin;
-        ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, fillTemplates(['`', resp_query, resp_resolve, resp_geo, resp_org, resp_pfx, resp_ptr, '`', resp_asn, '`', resp_footer_complete, '`'], query), {
+        ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, fillTemplates(['`', resp_query, resp_resolve, resp_geo, resp_org, resp_ptr, '`', resp_asn, '`', resp_footer_complete, '`'], query), {
             reply_to_message_id: ctx.update.message.message_id,
             parse_mode: 'Markdown',
             disable_web_page_preview: true
