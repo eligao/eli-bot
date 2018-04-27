@@ -70,6 +70,14 @@ function queryMMCity(addr) {
     return ret_data;
 }
 
+function queryMMASN(addr) {
+    let data = mm_asn.get(addr);
+    let ret_data = {
+        asn: data.autonomous_system_number,
+        as_desc: data.autonomous_system_organization
+    }
+}
+
 function queryIPIP(addr) {
     let data = ipip.findSync(addr);
     let ret_data = {
@@ -107,7 +115,7 @@ const resp_geo = template ` 地址: ${'country'} - ${'province'} - ${'city'}\n`;
 const resp_org = template ` 组织: ${'isp'} - ${'org'}\n`
 const resp_pfx = template ` 网段: ${'pfx'}${'pfx_cc'} - ${'pfx_name'} - ${'pfx_desc'}\n`;
 const resp_ptr = template ` 反解: ${'ptr'}\n`;
-const resp_asn = template `[AS${'asn'}${'as_cc'} ${'as_name'}, ${'as_desc'}](https://bgpview.io/asn/${'asn'})\n`;
+const resp_asn = template `[AS${'asn'} ${'as_desc'}](https://bgp.he.net/AS${'asn'})\n`;
 const resp_footer_complete = template `======\n查询完成，耗时${'ms_elapsed'}毫秒`;
 const resp_footer_pending = template `======\n查询中，已耗时${'ms_elapsed'}毫秒`;
 const resp_err_invalidargs = '参数错误\n使用方法：`/ip 主机名或IP地址`\n 例如：`/ip www.telegram.org`';
@@ -151,15 +159,15 @@ async function ip_query(ctx, next) {
         //console.log('ipQuery:',resIP)
         Object.assign(query, resIP);
         query.ms_elapsed = Date.now() - ms_begin;
-        await ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, fillTemplates(['`', resp_query, resp_resolve, resp_geo, resp_org, resp_footer_pending, '`'], query), {
-            reply_to_message_id: ctx.update.message.message_id,
-            parse_mode: 'Markdown',
-            disable_web_page_preview: true
-        });
+        // await ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, fillTemplates(['`', resp_query, resp_resolve, resp_geo, resp_org, resp_footer_pending, '`'], query), {
+        //     reply_to_message_id: ctx.update.message.message_id,
+        //     parse_mode: 'Markdown',
+        //     disable_web_page_preview: true
+        // });
         // await ctx.reply(JSON.stringify(resIP),{reply_to_message_id:ctx.update.message.message_id})
-        let resBgpview = await queryBgpview(addr);
+        let resMMASN = queryMMASN(addr);
         //console.log('BGPView:',resBgpview)
-        Object.assign(query, resBgpview);
+        Object.assign(query, resMMASN);
         query.ms_elapsed = Date.now() - ms_begin;
         ctx.telegram.editMessageText(msg.chat.id, msg.message_id, null, fillTemplates(['`', resp_query, resp_resolve, resp_geo, resp_org, resp_pfx, resp_ptr, '`', resp_asn, '`', resp_footer_complete, '`'], query), {
             reply_to_message_id: ctx.update.message.message_id,

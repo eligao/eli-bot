@@ -8,6 +8,7 @@ wget \
 mkdir data_tmp
 cd data_tmp
 wget $MMDB_CITY_URL
+wget $MMDB_ASN_URL
 tar -zxf *.tar.gz
 cd ..
 mv -v data_tmp/*/*.mmdb data/
