@@ -1,7 +1,6 @@
 require('dotenv').config();
 const Telegraf = require('telegraf');
 const http = require('http');
-const request = require('request');
 const configs = require('./configs');
 const cmd_ip = require('./modules/ip');
 const cmd_ping = require('./modules/ping');
