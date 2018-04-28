@@ -111,8 +111,6 @@ async function dnsLookupRetry(...args) {
     throw e;
 }
 
-const dnsResolvePtr = addr => dns.resolvePtr(addr,(err, data) => new Promise((resolve, reject)=>err? reject(err) : resolve(data)));
-
 const resp_query = template `查询目标 ${'host'}\n`;
 const resp_resolve = template `解析地址 ${'addr'}\n`;
 const resp_geo = template ` 地址: ${'country'} - ${'province'} - ${'city'}\n`;
@@ -169,7 +167,6 @@ async function ip_query(ctx, next) {
         //     disable_web_page_preview: true
         // });
         // await ctx.reply(JSON.stringify(resIP),{reply_to_message_id:ctx.update.message.message_id})
-        query.ptr = await dnsResolvePtr(addr);
         let resMMASN = queryMMASN(addr);
         //console.log('BGPView:',resBgpview)
         Object.assign(query, resMMASN);
