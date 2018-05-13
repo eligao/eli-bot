@@ -12,6 +12,8 @@ const util = require('util');
 const dns = require('dns');
 const LRU = require('lru-cache');
 const { template, fillTemplates } = require('../../utils/stringTemplate');
+const { get } = require('lodash');
+
 
 // const mm_asn= mmdb.openSync('data/GeoLite2-ASN.mmdb')
 // const TgLogger = require('../../utils/TgLogger')
@@ -52,11 +54,11 @@ async function queryBgpview(addr) {
             pfx_cc: flag(pfx.country_code),
             pfx_name: pfx.name,
             pfx_desc: pfx.description,
-            ptr: data.data.ptr_record,
-            asn: pfx.asn.asn,
-            as_name: pfx.asn.name,
-            as_desc: pfx.asn.description,
-            as_cc: flag(pfx.asn.country_code)
+            ptr: get(data,'data.ptr_record'),
+            asn: get(pfx,'asn.asn'),
+            as_name: get(pfx,'asn.name'),
+            as_desc: get(pfx,'asn.description'),
+            as_cc: flag(get(pfx,'asn.country_code'))
         };
     return return_data;
 }
@@ -64,9 +66,9 @@ async function queryBgpview(addr) {
 function queryMMCity(addr) {
     let data = mm_city.get(addr) || {};
     let ret_data = {
-        city: mmdbI18nStr((data.city || {}).names, ['zh-CN']),
-        province: mmdbI18nStr((data.subdivisions || [{}])[0].names, ['zh-CN']),
-        country: mmdbI18nStr((data.country.names || {}), ['zh-CN'])
+        city: mmdbI18nStr(get(data,'city.names'), ['zh-CN']),
+        province: mmdbI18nStr(get(data,'subdivisions[0].names'), ['zh-CN']),
+        country: mmdbI18nStr(get(data,'country.names'), ['zh-CN'])
     };
     return ret_data;
 }
