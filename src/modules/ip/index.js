@@ -62,7 +62,7 @@ async function queryBgpview(addr) {
 }
 
 function queryMMCity(addr) {
-    let data = mm_city.get(addr);
+    let data = mm_city.get(addr) || {};
     let ret_data = {
         city: mmdbI18nStr((data.city || {}).names, ['zh-CN']),
         province: mmdbI18nStr((data.subdivisions || [{}])[0].names, ['zh-CN']),
@@ -72,7 +72,7 @@ function queryMMCity(addr) {
 }
 
 function queryMMASN(addr) {
-    let data = mm_asn.get(addr);
+    let data = mm_asn.get(addr) || {};
     let ret_data = {
         asn: data.autonomous_system_number,
         as_desc: data.autonomous_system_organization
