@@ -46,7 +46,7 @@ async function main() {
     bot.command('ip', parse_args, parse_reply, cmd_ip);
     bot.command('ip6', parse_args, parse_reply, cmd_ip);
     bot.command('ping', cmd_ping);
-    bot.command('as', parse_args, cmd_as);
+    // bot.command('as', parse_args, cmd_as);
     // if(configs.BOT_HUOBI_OTC_CHANNEL_ID)
     //     huobiPoll.startSendingOTCStatus(bot,configs.BOT_HUOBI_OTC_CHANNEL_ID,60000);
 
