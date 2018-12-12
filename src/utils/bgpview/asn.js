@@ -59,34 +59,35 @@ Body:
 */
 
 const asnCache = LRU({
-    max: 1000,
-    maxAge: 1000 * 60 * 60 * 6
+  max: 1000,
+  maxAge: 1000 * 60 * 60 * 6
 });
 
 async function query(asn) {
-    let iasn = parseInt(asn);
-    // 4Byte ASN
-    if ( Number.isNaN(iasn) || iasn > 2147483647 || iasn < 0) {
-        let err = new Error("Invalid ASN");
-        err.code = "E_ASN_INVALID";
-        throw err;
+  let iasn = parseInt(asn);
+  // 4Byte ASN
+  if (Number.isNaN(iasn) || iasn > 2147483647 || iasn < 0) {
+    let err = new Error("Invalid ASN");
+    err.code = "E_ASN_INVALID";
+    throw err;
+  }
+  let data = asnCache.get(iasn);
+  if (!data) {
+    let res = await fetch(BGPVIEW_API_ASN + asn);
+    if (res.status !== 200) {
+      let err = new Error(
+        resData.status_message || "Invalid response with code" + res.status
+      );
+      err.code = "E_ASN_QUERY";
     }
-    let data = asnCache.get(iasn);
-    if(!data){
-        let res = await fetch(BGPVIEW_API_ASN + asn);
-        if(res.status !== 200) {
-            let err = new Error(resData.status_message || "Invalid response with code"+res.status);
-            err.code = "E_ASN_QUERY";
-        }
-        let resData = await res.json();
-        if (resData.status === "ok" && resData.data) 
-            data = resData.data;
-        else {
-            let err = new Error(resData.status_message || "Error querying data");
-            err.code = "E_ASN_QUERY";
-        }
+    let resData = await res.json();
+    if (resData.status === "ok" && resData.data) data = resData.data;
+    else {
+      let err = new Error(resData.status_message || "Error querying data");
+      err.code = "E_ASN_QUERY";
     }
-    return data;
+  }
+  return data;
 }
 
 module.exports = query;
